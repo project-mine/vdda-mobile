@@ -3,33 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:vdds_mobile/app_bloc.dart';
 import 'package:vdds_mobile/app_repositories.dart';
-import 'package:vdds_mobile/home.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:vdds_mobile/login.dart';
-import 'package:vdds_mobile/login_bloc/login_bloc.dart';
-import 'package:vdds_mobile/repositories/login_repository.dart';
 
 void main() {
-  runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) => LoginBloc(
-                  authenticateUserRepository:
-                      RepositoryProvider.of<AuthenticateUserRepository>(
-                          context),
-                )),
-      ],
-      child: MyApp(),
-    )
-  );
-
-  // runApp(
-  //   AppRepositories(
-  //     appBloc: AppBlocs(app: Tabs(0)),
-  //     client: Client(),
-
-  //     ));
+  runApp(AppRepositories(
+    appBloc: AppBlocs(app: MyApp()),
+    client: Client(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

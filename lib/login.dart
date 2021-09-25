@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:vdds_mobile/home.dart';
 import 'package:vdds_mobile/login_bloc/login_bloc.dart';
@@ -92,16 +93,41 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  RaisedButton(
-                    child: Text('Login'),
-                    color: Colors.blue,
-                    onPressed: () {
-                      loginBloc.add(AuthenticateUserEvent(
-                          username: _usernameController.text,
-                          password: _passwordController.text));
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                  BlocListener<LoginBloc, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(state.message),
+                          ),
+                        );
+                      }
+                      // TODO: implement listener
                     },
+                    child: BlocBuilder<LoginBloc, LoginState>(
+                      builder: (context, state) {
+                        if (state is LoginLoading) {
+                          return buildLoading();
+                        } else if (state is LoginLoaded) {
+                          return loadedBuild(state.loginModelResponse);
+                        } else if (state is LoginError) {
+                          return errorBuild();
+                        }
+                        return RaisedButton(
+                          child: Text('Login'),
+                          color: Colors.blue,
+                          onPressed: () {
+                            loginBloc.add(AuthenticateUserEvent(
+                                username: _usernameController.text,
+                                password: _passwordController.text));
+
+                            print(_usernameController.text +
+                                _passwordController.text);
+                            print("event trigered");
+                          },
+                        );
+                      },
+                    ),
                   ),
                   SizedBox(height: 10),
                   GestureDetector(
@@ -127,6 +153,37 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  loadedBuild(LoginModelResponse model) {
+    return Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Home()));
+  }
+
+  buildLoading() {
+    return Container(
+      child: Column(
+        children: [
+          SpinKitDoubleBounce(color: Colors.blue),
+          SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+
+  errorBuild() {
+    return RaisedButton(
+      child: Text('Login'),
+      color: Colors.blue,
+      onPressed: () {
+        loginBloc.add(AuthenticateUserEvent(
+            username: _usernameController.text,
+            password: _passwordController.text));
+
+        print(_usernameController.text + _passwordController.text);
+        print("event trigered");
+      },
     );
   }
 }

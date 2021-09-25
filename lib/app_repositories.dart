@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:http/http.dart' show Client;
+import 'package:vdds_mobile/repositories/login_repository.dart';
 
 class AppRepositories extends StatelessWidget {
   final Widget appBloc;
@@ -19,13 +20,8 @@ class AppRepositories extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (BuildContext context) {},
-          // create: (context) => GadgetsRepository(
-          //   gadgetsProvider: AllGadgetsProvider(
-
-          //   ),
-          // ),
-        ),
+            //  create: (BuildContext context) {},
+            create: (context) => AuthenticateUserRepository()),
       ],
       child: appBloc,
     );

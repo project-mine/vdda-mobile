@@ -8,8 +8,8 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc({@required
-    this.authenticateUserRepository, 
+  LoginBloc({
+    @required this.authenticateUserRepository,
     LoginState initialState,
     // @required this.gadgetsRepository
   }) : super(initialState);
@@ -24,7 +24,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             event.username, event.password);
         yield LoginLoaded(loginModelResponse: data);
       } catch (e) {
-        yield LoginError(message: "An error occured in authentication");
+        print("........................." + e.message.toString());
+        yield LoginError(message: e.message);
       }
     }
   }
