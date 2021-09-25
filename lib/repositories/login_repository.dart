@@ -9,7 +9,7 @@ class AuthenticateUserRepository {
   Future<LoginModelResponse> authenticateUser(
       String username, String password) async {
     final response = await http.post(
-      Uri.parse('https://192.168.1.113:8000/auth/login/'),
+      Uri.parse('http://192.168.1.113:8000/auth/login/'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
