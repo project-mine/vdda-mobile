@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:http/http.dart' show Client;
 import 'package:vdds_mobile/repositories/login_repository.dart';
+import 'package:vdds_mobile/repositories/vaccination_repository.dart';
 
 class AppRepositories extends StatelessWidget {
   final Widget appBloc;
@@ -22,6 +23,7 @@ class AppRepositories extends StatelessWidget {
         RepositoryProvider(
             //  create: (BuildContext context) {},
             create: (context) => AuthenticateUserRepository()),
+        RepositoryProvider(create: (context) => VaccionationRepository()),
       ],
       child: appBloc,
     );

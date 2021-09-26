@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:vdds_mobile/models/vaccination_response_model.dart';
 
 class VaccinationDetails extends StatefulWidget {
-  VaccinationDetails({Key key}) : super(key: key);
+  final int id;
+  final Vaccine vaccine;
+  final String name;
+  final String batch;
+  final DateTime expiryDate;
+  VaccinationDetails(
+      {Key key,
+      @required this.id,
+      @required this.vaccine,
+      @required this.name,
+      @required this.batch,
+      @required this.expiryDate})
+      : super(key: key);
 
   @override
   _VaccinationDetailsState createState() => _VaccinationDetailsState();
@@ -47,7 +60,7 @@ class _VaccinationDetailsState extends State<VaccinationDetails> {
                                   style: BorderStyle.solid)),
                           child: Center(
                             child: Text(
-                              "",
+                              widget.name,
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -78,7 +91,7 @@ class _VaccinationDetailsState extends State<VaccinationDetails> {
                                   style: BorderStyle.solid)),
                           child: Center(
                             child: Text(
-                              "",
+                              widget.batch,
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -109,7 +122,7 @@ class _VaccinationDetailsState extends State<VaccinationDetails> {
                                   style: BorderStyle.solid)),
                           child: Center(
                             child: Text(
-                              "",
+                              widget.expiryDate.toString(),
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -141,7 +154,7 @@ class _VaccinationDetailsState extends State<VaccinationDetails> {
                                   style: BorderStyle.solid)),
                           child: Center(
                             child: Text(
-                              "",
+                              widget.expiryDate.toString(),
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
