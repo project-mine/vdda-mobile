@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vdds_mobile/models/vaccination_response_model.dart';
+
+import 'models/vaccination_response.dart';
 
 class VaccinationDetails extends StatefulWidget {
   final int id;

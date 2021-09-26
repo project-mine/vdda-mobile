@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:vdds_mobile/details.dart';
-import 'package:vdds_mobile/models/vaccination_response_model.dart';
+import 'package:vdds_mobile/models/vaccination_response.dart';
 
 class Vaccines extends StatefulWidget {
-  final vaccinationResponseModel;
+  final List<VaccinationResponse> vaccinationResponseModel;
   Vaccines({Key key, @required this.vaccinationResponseModel})
       : super(key: key);
 
@@ -28,11 +28,12 @@ class _VaccinesState extends State<Vaccines> {
         ));
   }
 
-  Widget buildDosesList(List<Dose> dose) {
+  Widget buildDosesList(List<VaccinationResponse> vaccinations) {
     return Expanded(
         child: ListView.builder(
-            itemCount: dose.length,
+            itemCount: vaccinations.length,
             itemBuilder: (context, index) {
+              final vaccination = vaccinations[index];
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -40,17 +41,17 @@ class _VaccinesState extends State<Vaccines> {
                       PageTransition(
                           type: PageTransitionType.rightToLeft,
                           child: VaccinationDetails(
-                            batch: dose[index].batch,
-                            expiryDate: dose[index].expiryDate,
-                            id: dose[index].id,
-                            name: dose[index].name,
-                            vaccine: dose[index].vaccine,
+                            batch: vaccination.dose.batch,
+                            expiryDate: DateTime.parse(vaccination.dose.expiryDate),
+                            id: vaccination.dose.id,
+                            name: vaccination.dose.name,
+                            vaccine: vaccination.dose.vaccine,
                           )));
                 },
                 child: Card(
                   child: ListTile(
                     tileColor: Colors.grey[100],
-                    title: Text('Dose: ' '${dose[index].id}'),
+                    title: Text('Dose: ' '${vaccination.dose.name}'),
                   ),
                   elevation: 8,
                   shadowColor: Colors.blue,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:vdds_mobile/models/vaccination_response_model.dart';
+import 'package:vdds_mobile/models/vaccination_response.dart';
 import 'package:vdds_mobile/vaccines.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
@@ -18,7 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var idController = new TextEditingController();
   VaccinationBloc vaccinationBloc;
-  VaccinationResponseModel vaccinationResponseModel;
+  VaccinationResponse vaccinationResponseModel;
 
   @override
   void initState() {
@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  loadedBuild(VaccinationResponseModel model) {
+  loadedBuild(List<VaccinationResponse> model) {
     return Navigator.push(
         context,
         PageTransition(

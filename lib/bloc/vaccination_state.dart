@@ -10,7 +10,7 @@ abstract class VaccinationState extends Equatable {
 class VaccinationLoading extends VaccinationState {}
 
 class VaccinationLoaded extends VaccinationState {
-  final VaccinationResponseModel vaccinationResponseModel;
+  final List<VaccinationResponse> vaccinationResponseModel;
 
   VaccinationLoaded({@required this.vaccinationResponseModel});
 }

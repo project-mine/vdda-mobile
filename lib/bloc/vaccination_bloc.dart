@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:vdds_mobile/models/vaccination_response_model.dart';
+import 'package:vdds_mobile/models/vaccination_response.dart';
 import 'package:vdds_mobile/repositories/vaccination_repository.dart';
 
 part 'vaccination_event.dart';
@@ -20,7 +20,7 @@ class VaccinationBloc extends Bloc<VaccinationEvent, VaccinationState> {
     if (event is GetVaccinationDetails) {
       try {
         yield VaccinationLoading();
-        var data = await vaccionationRepository.getVaccinationData(
+        List<VaccinationResponse> data = await vaccionationRepository.getVaccinationData(
             idNumber: event.idNumber);
         yield VaccinationLoaded(vaccinationResponseModel: data);
       } catch (e) {
