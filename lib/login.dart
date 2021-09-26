@@ -31,12 +31,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
     loginBloc = BlocProvider.of<LoginBloc>(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    _usernameController.text='thabo@testmail.com';
+    _passwordController.text='56aysgauia65';
+
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
     double height = queryData.size.height;

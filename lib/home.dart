@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var idController = new MaskedTextController(text: '', mask: '000000000000');
+  var idController = new TextEditingController();
   VaccinationBloc vaccinationBloc;
   VaccinationResponseModel vaccinationResponseModel;
 
@@ -29,6 +29,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    idController.text = '09-8789979Y66';
+
     return Scaffold(
       appBar: AppBar(title: Text("Home")),
       body: Padding(

@@ -10,9 +10,9 @@ class VaccionationRepository {
   Future<VaccinationResponseModel> getVaccinationData({
     @required String idNumber,
   }) async {
-    var queryString = '?{"id_number"="$idNumber",}';
+    var queryString = '?id_number=$idNumber';
 
-    var url = '127.0.0.1:8000/api/core/vaccinations/vaccinated/';
+    var url = 'http://192.168.1.113:8000/api/core/vaccinations/vaccinated/';
 
     var urlheader = '$url$queryString';
     print(urlheader);
